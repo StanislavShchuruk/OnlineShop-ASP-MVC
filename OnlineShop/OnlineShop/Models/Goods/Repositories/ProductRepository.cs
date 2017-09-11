@@ -1,16 +1,17 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data.Entity;
 using System.Linq;
 
 namespace OnlineShop.Models
 {
     public class ProductRepository : IProductRepository
     {
-        private readonly IProductsDbContext _context;
+        private ApplicationDbContext _context;
 
-        public ProductRepository(IProductsDbContext context)
+        public ProductRepository()
         {
-            _context = context;
+            _context = new ApplicationDbContext();
         }
 
         public IQueryable<Product> Products
@@ -48,11 +49,40 @@ namespace OnlineShop.Models
             _context.SaveChanges();
         }
 
+        public void EditProduct(Product product)
+        {
+            _context.Entry(product).State = EntityState.Modified;
+            _context.SaveChanges();
+        }
+
         public void DeleteProduct(Int32 id)
         {
             Product product = GetProduct(id);
             _context.Products.Remove(product);
             _context.SaveChanges();
         }
+
+        #region Disposing
+
+        private bool disposed = false;
+
+        protected virtual void Dispose(bool disposing)
+        {
+            if (this.disposed) return;
+            if (disposing)
+            {
+                _context.Dispose();
+                _context = null;
+            }
+            this.disposed = true;
+        }
+
+        public void Dispose()
+        {
+            this.Dispose(true);
+            GC.SuppressFinalize(this);
+        }
+
+        #endregion
     }
 }

@@ -1,9 +1,10 @@
 ﻿using System.Data.Entity;
 using Microsoft.AspNet.Identity.EntityFramework;
+using System.Data.Entity.Infrastructure;
 
 namespace OnlineShop.Models
 {
-    public class ApplicationDbContext : IdentityDbContext<AppUser> , IProductsDbContext
+    public class ApplicationDbContext : IdentityDbContext<AppUser>
     {
         static ApplicationDbContext()
         {
@@ -26,6 +27,12 @@ namespace OnlineShop.Models
         public DbSet<Product> Products { get; set; }
         public DbSet<ProductType> ProductTypes { get; set; }
         public DbSet<Brand> Brands { get; set; }
+        //public virtual DbSet<Order> Orders { get; set; }
+
+        public new DbEntityEntry Entry(object obj)
+        {
+            return base.Entry(obj);
+        }
 
         public new void SaveChanges()
         {
@@ -35,6 +42,9 @@ namespace OnlineShop.Models
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);
+
+            //modelBuilder.Entity<Order>().Property(o => o.UserId).HasMaxLength(128);
+            //modelBuilder.Entity<Order>().HasKey(o => new { o.ProductId, o.UserId });
 
             modelBuilder.Entity<Product>().HasMany(p => p.Users)
                 .WithMany(u => u.Products)

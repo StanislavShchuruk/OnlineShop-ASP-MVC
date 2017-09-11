@@ -65,5 +65,11 @@ namespace OnlineShop.Controllers
         {
             _repository.DeleteProduct(productId);
         }
+
+        protected override void Dispose(bool disposing)
+        {
+            _repository.Dispose();
+            base.Dispose(disposing);
+        }
     }
 }

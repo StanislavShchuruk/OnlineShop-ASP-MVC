@@ -4,6 +4,7 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using Microsoft.AspNet.Identity;
+using System.Threading.Tasks;
 
 using OnlineShop.Models;
 
@@ -11,28 +12,19 @@ namespace OnlineShop.Controllers
 {
     public class OrderController : Controller
     {
+        private readonly IOrderRepository _repository;
 
-        private readonly UserManager<AppUser> _userManager;
-        private readonly IProductRepository _productRepository;
-
-        public OrderController(UserManager<AppUser> userManager, IProductRepository productRepository)
+        public OrderController(IOrderRepository repository)
         {
-            _userManager = userManager;
-            _productRepository = productRepository;
+            _repository = repository;
         }
 
         [HttpPost]
         public void AddIntoBasket(Int32? productId)
         {
-            AppUser currentUser = _userManager.Users.Where(u => u.UserName == User.Identity.Name).FirstOrDefault();
-            if (currentUser != null)
+            if ((productId != null) && (User.Identity.IsAuthenticated))
             {
-                Product product = _productRepository.Products.Where(p => p.Id == productId).FirstOrDefault();
-                if (product != null)
-                {
-                    currentUser.Products.Add(product);
-                    _userManager.Update(currentUser);
-                }
+                _repository.AddOrder(User.Identity.Name, (Int32)productId);
             }
         }
 
@@ -40,12 +32,18 @@ namespace OnlineShop.Controllers
         public JsonResult GetCurrentUserProductsIdList()
         {
             List<int> productIdList = new List<int>();
-            AppUser currentUser = _userManager.Users.Where(u => u.UserName == User.Identity.Name).FirstOrDefault();
-            if(currentUser != null)
+            AppUser currentUser = _repository.GetUserByName(User.Identity.Name);
+            if (currentUser != null)
             {
                 productIdList = currentUser.Products.Select(p => p.Id).ToList();
             }
             return Json(new { data = productIdList });
+        }
+
+        protected override void Dispose(bool disposing)
+        {
+            _repository.Dispose();
+            base.Dispose(disposing);
         }
     }
 }

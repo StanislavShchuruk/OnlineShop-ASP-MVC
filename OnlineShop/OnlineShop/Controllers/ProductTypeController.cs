@@ -43,5 +43,11 @@ namespace OnlineShop.Controllers
                          "\"error_message\" : \"" + ex.Message + "\" }";
             }
         }
+
+        protected override void Dispose(bool disposing)
+        {
+            _repository.Dispose();
+            base.Dispose(disposing);
+        }
     }
 }

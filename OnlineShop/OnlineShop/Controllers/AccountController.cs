@@ -114,5 +114,11 @@ namespace OnlineShop.Controllers
         }
 
         #endregion
+
+        protected override void Dispose(bool disposing)
+        {
+            _userManager.Dispose();
+            base.Dispose(disposing);
+        }
     }
 }

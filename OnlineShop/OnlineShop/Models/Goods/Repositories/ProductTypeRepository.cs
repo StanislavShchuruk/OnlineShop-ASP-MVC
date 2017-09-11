@@ -7,11 +7,11 @@ namespace OnlineShop.Models
 {
     public class ProductTypeRepository : IProductTypeRepository
     {
-        private readonly IProductsDbContext _context;
+        private ApplicationDbContext _context;
 
-        public ProductTypeRepository(IProductsDbContext context)
+        public ProductTypeRepository()
         {
-            _context = context;
+            _context = new ApplicationDbContext();
         }
 
         public IQueryable<ProductType> ProductTypes
@@ -41,5 +41,28 @@ namespace OnlineShop.Models
                                 "\'. В базе данных содержаться товары использующие удаляемый тип товаров.");
             }
         }
+
+        #region Disposing
+
+        private bool disposed = false;
+
+        protected virtual void Dispose(bool disposing)
+        {
+            if (this.disposed) return;
+            if (disposing)
+            {
+                _context.Dispose();
+                _context = null;
+            }
+            this.disposed = true;
+        }
+
+        public void Dispose()
+        {
+            this.Dispose(true);
+            GC.SuppressFinalize(this);
+        }
+
+        #endregion
     }
 }
