@@ -1,3 +1,3 @@
 My ASP.NET MVC Project.
 
-Status: (In developing...)
+Status: (in progress...)
