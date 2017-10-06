@@ -6,7 +6,7 @@ using Microsoft.Owin;
 using System.Threading.Tasks;
 using System.Data.Entity;
 
-namespace OnlineShop.Models
+namespace OnlineShop.Models.Identity
 {
     public class AppUserManager : UserManager<AppUser>
     {

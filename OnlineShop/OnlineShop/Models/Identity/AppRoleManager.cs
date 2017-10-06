@@ -3,7 +3,9 @@ using Microsoft.AspNet.Identity.EntityFramework;
 using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin;
 
-namespace OnlineShop.Models
+using OnlineShop.Models.Context;
+
+namespace OnlineShop.Models.Identity
 {
     public class AppRoleManager : RoleManager<AppRole>
     {

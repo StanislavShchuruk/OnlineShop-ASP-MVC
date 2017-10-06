@@ -1,11 +1,10 @@
 ﻿using System;
 using Microsoft.AspNet.Identity.EntityFramework;
 using System.Collections.Generic;
-using System.Security.Claims;
-using System.Threading.Tasks;
-using Microsoft.AspNet.Identity;
 
-namespace OnlineShop.Models
+using OnlineShop.Models;
+
+namespace OnlineShop.Models.Identity
 {
     public class AppUser : IdentityUser
     {

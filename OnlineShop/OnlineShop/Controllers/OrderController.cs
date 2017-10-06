@@ -1,12 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Web;
 using System.Web.Mvc;
-using Microsoft.AspNet.Identity;
-using System.Threading.Tasks;
 
-using OnlineShop.Models;
+using OnlineShop.Contracts.Repositories;
 
 namespace OnlineShop.Controllers
 {
@@ -31,12 +28,7 @@ namespace OnlineShop.Controllers
         [HttpPost]
         public JsonResult GetCurrentUserProductsIdList()
         {
-            List<int> productIdList = new List<int>();
-            AppUser currentUser = _repository.GetUserByName(User.Identity.Name);
-            if (currentUser != null)
-            {
-                productIdList = currentUser.Products.Select(p => p.Id).ToList();
-            }
+            List<int> productIdList = _repository.GetUserProductIdList(User.Identity.Name);
             return Json(new { data = productIdList });
         }
 

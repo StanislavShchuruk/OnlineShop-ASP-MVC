@@ -1,14 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Web.Mvc;
-using System.Linq;
-using System.Data.Entity;
 using System.IO;
-using System.Threading;
-using System.Threading.Tasks;
-
-
-using OnlineShop.Models;
 
 namespace OnlineShop.Controllers
 {
@@ -20,9 +12,9 @@ namespace OnlineShop.Controllers
 
         }
 
-        public ActionResult Shop()
+        public ActionResult Index()
         {
-            return View();
+            return View("Shop");
         }
 
         [HttpPost]

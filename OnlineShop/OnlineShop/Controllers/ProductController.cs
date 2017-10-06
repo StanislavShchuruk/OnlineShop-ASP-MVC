@@ -1,9 +1,8 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Web;
 using System.Web.Mvc;
 
+using OnlineShop.Contracts.Repositories;
 using OnlineShop.Models;
 
 namespace OnlineShop.Controllers
@@ -37,6 +36,7 @@ namespace OnlineShop.Controllers
         [HttpPost]
         public JsonResult GetProducts()
         {
+            //Product list = _repository.Products.FirstOrDefault();
             return Json(new { data = _repository.Products.ToList() });
         }
 

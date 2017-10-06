@@ -239,13 +239,14 @@
     <Compile Include="Controllers\ProductController.cs" />
     <Compile Include="Controllers\ProductTypeController.cs" />
     <Compile Include="Migrations\Configuration.cs" />
-    <Compile Include="Models\Goods\Repositories\BrandRepository.cs" />
-    <Compile Include="Models\Goods\Interfaces\IBrandRepository.cs" />
-    <Compile Include="Models\Goods\Interfaces\IProductsDbContext.cs" />
-    <Compile Include="Models\Goods\Interfaces\IProductRepository.cs" />
-    <Compile Include="Models\Goods\Interfaces\IProductTypeRepository.cs" />
-    <Compile Include="Models\Goods\Repositories\ProductRepository.cs" />
-    <Compile Include="Models\Goods\Repositories\ProductTypeRepository.cs" />
+    <Compile Include="Contracts\Repositories\IOrderRepository.cs" />
+    <Compile Include="Contracts\Repositories\IBrandRepository.cs" />
+    <Compile Include="Contracts\Repositories\IProductRepository.cs" />
+    <Compile Include="Contracts\Repositories\IProductTypeRepository.cs" />
+    <Compile Include="Repositories\BrandRepository.cs" />
+    <Compile Include="Repositories\OrderRepository.cs" />
+    <Compile Include="Repositories\ProductRepository.cs" />
+    <Compile Include="Repositories\ProductTypeRepository.cs" />
     <Compile Include="Startup.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
@@ -256,14 +257,17 @@
     <Compile Include="Models\Identity\AppRoleManager.cs" />
     <Compile Include="Models\Identity\AppUser.cs" />
     <Compile Include="Models\Identity\AppUserManager.cs" />
-    <Compile Include="Models\Goods\Types\Brand.cs" />
-    <Compile Include="Models\AppDbInitialiser.cs" />
-    <Compile Include="Models\Goods\Types\ProductType.cs" />
-    <Compile Include="Models\ApplicationDbContext.cs" />
-    <Compile Include="Models\Identity\LoginModel.cs" />
-    <Compile Include="Models\Goods\Types\Product.cs" />
-    <Compile Include="Models\Identity\RegisterModel.cs" />
+    <Compile Include="Models\Brand.cs" />
+    <Compile Include="Models\Context\AppDbInitialiser.cs" />
+    <Compile Include="Models\ProductType.cs" />
+    <Compile Include="Models\Context\ApplicationDbContext.cs" />
+    <Compile Include="ViewModels\LoginModel.cs" />
+    <Compile Include="Models\Product.cs" />
+    <Compile Include="ViewModels\RegisterModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="ViewModels\BrandModel.cs" />
+    <Compile Include="ViewModels\ProductModel.cs" />
+    <Compile Include="ViewModels\ProductTypeModel.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Views\web.config">

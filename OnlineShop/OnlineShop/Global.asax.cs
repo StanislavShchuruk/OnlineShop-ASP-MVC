@@ -2,7 +2,7 @@
 using System.Web.Routing;
 using System.Data.Entity;
 
-using OnlineShop.Models;
+using OnlineShop.Models.Context;
 
 namespace OnlineShop
 {

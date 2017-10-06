@@ -4,8 +4,6 @@ using Owin;
 using Microsoft.Owin.Security.Cookies;
 using Microsoft.AspNet.Identity;
 
-using OnlineShop.Models;
-
 namespace OnlineShop
 {
     public partial class Startup
