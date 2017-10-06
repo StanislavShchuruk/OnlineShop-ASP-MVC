@@ -1,0 +1,32 @@
+﻿
+@{
+    ViewBag.Title = "RGB Shop";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@section Styles {
+    <link href="~/Content/shop.css" rel="stylesheet" type="text/css" />
+}
+
+<div class="title main_title">
+    <div class="rgb_title">
+        <span style="color: red;">R</span><span style="color: green;">G</span><span style="color: blue;">B</span>
+    </div>
+     Shop
+</div>
+<button class="btn_b btn_add" onclick="window.open('/Product/ProductEditing', '_self')">Добавить</button>
+<button class="btn_b btn_basket" onclick="">Корзина</button>
+<div id="goods_div" class="goods_list"></div>
+
+<div class="identity_div">
+    @{ Html.RenderPartial("~/Views/Account/_LoginPartial.cshtml"); }
+</div>
+
+@section Scripts{
+    <script src="/scripts/shop.js"></script>
+    <script type="text/javascript">
+        getProducts();
+    </script>
+}
+
+

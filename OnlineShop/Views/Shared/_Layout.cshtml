@@ -1,0 +1,24 @@
+﻿<!DOCTYPE html>
+
+@using System.Web.Optimization
+
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="~/Content/common.css" rel="stylesheet" type="text/css" />
+    @*Стили конкретного представления*@
+    @RenderSection("Styles", false);
+</head>
+<body>
+    <div>
+        @RenderBody()
+    </div>
+</body>
+@Scripts.Render("~/scripts/jquery-1.10.2.js")
+@Scripts.Render("~/scripts/jquery.unobtrusive-ajax.min.js")
+@Scripts.Render("~/scripts/common.js")
+@*Скрипты конкретного представления*@
+@RenderSection("Scripts", false);
+
+</html>

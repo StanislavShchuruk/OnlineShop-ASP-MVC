@@ -1,0 +1,113 @@
+﻿@model OnlineShop.Models.Product
+
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+
+    //По умолчанию для нового продукта
+    String imagePath = "/Pictures/no-image-icon-23.jpg";
+    String imageName = "no-image-icon-23.jpg";
+    String btnSubmitName = "Добавить";
+    String formAction = "/Product/AddProduct";
+
+    //для редактирования
+    if (Model.Id != 0)
+    {
+        imagePath = "/Pictures/" + @Model.Image;
+        imageName = @Model.Image;
+        btnSubmitName = "Редактировать";
+        formAction = "/Product/EditProduct";
+    }
+}
+
+@section Styles{
+    <link href="/Content/productEditing.css" rel="stylesheet" type="text/css" />
+}
+
+<h2 class="title">@ViewBag.Title</h2>
+
+<div class="prod_edit_main_div">
+
+    <div class="param_val_div">
+        <div class="param">ID:</div>
+        <div id="product_id" class="val">
+            @if(Model.Id != 0) { @Model.Id; }
+            else { String str = "new"; @str; }
+        </div>
+        <input type="hidden" name="id" value="@Model.Id" form="product_form"/>
+    </div>
+    <div class="param_val_div">
+        <div class="param">Название:</div>
+        <input id="Name" class="val val_name" type="text" name="Name" form="product_form" 
+               value="@Model.Name" data-val="true" data-val-required="Введите название продукта"/>
+        @Html.ValidationMessageFor(Model => Model.Name)
+    </div>
+
+    <div class="param_val_div">
+        <div class="param">Тип:</div>
+        <input type="hidden" id="editing_product_type_id" value="@Model.ProductType.Id"/>
+        <select class="val select" id="product_type_select" size="1" name="product_type" form="product_form"></select>
+        <button name="new_type" class="btn_add_option" onclick="onAddingOption('new_type', 'add_type')">новый...</button>
+        <button name="new_type" class="btn_add_option" onclick="deleteProductType()">удалить</button>
+        <input id="new_type" name="add_type" type="text" class="hidden"/>
+        <button name="add_type" id="add_type" class="btn_add_option hidden" onclick="addProductType()">добавить</button>
+        <button name="add_type" id="cancel_add_type" class="btn_add_option hidden"
+                 onclick="onAddingOption('add_type', 'new_type')">отмена</button>
+    </div>
+
+    <div class="param_val_div">
+        <div class="param">Бренд:</div>
+        <input type="hidden" id="editing_brand_id" value="@Model.Brand.Id" />
+        <select class="val" id="brand_select" size="1" name="brand" form="product_form"></select>
+        <button name="new_brand" class="btn_add_option" onclick="onAddingOption('new_brand', 'add_brand')">новый...</button>
+        <button name="new_brand" class="btn_add_option" onclick="deleteBrand()">удалить</button>
+        <input id="new_brand" name="add_brand" type="text"  class="hidden"/>
+        <button name="add_brand" class="btn_add_option hidden" onclick="addBrand()">добавить</button>
+        <button name="add_brand" class="btn_add_option hidden" 
+                onclick="onAddingOption('add_brand', 'new_brand')">отмена</button>
+    </div>
+
+    <div class="param_val_div param_val_div_img">
+        <div>
+            <div class="param">
+                Изображение:
+                <div class="load_file">
+                    <input style="margin: 10px;" width="500" type="file" id="choose_image" />
+                    <button style="margin: 10px;" id="btn_upload_img">Загрузить изображение</button>
+                </div>
+            </div>
+        </div>
+        <div class="val val_img">
+            <input type="hidden" id="image_name" name="image_name" value="@imageName" form="product_form"/>
+            <img class="product_img" id="uploaded_image" src="@imagePath"/>
+        </div>
+    </div>
+
+    <div class="param_val_div">
+        <div class="param">Цена:</div>
+        <input id="Price" class="val val_num" type="text" name="Price" form="product_form" 
+               value="@Model.Price"/>
+        грн.
+        @Html.ValidationMessageFor(Model => Model.Price)
+    </div>
+
+    <div class="param_val_div">
+        <div class="param">Количество:</div>
+        <input id="Quantity" class="val val_num" type="text" name="Quantity" form="product_form" 
+               value="@Model.Quantity"/>
+        шт.
+        @Html.ValidationMessageFor(Model => Model.Quantity)
+    </div>
+
+    <form id="product_form" method="post" action="@formAction">
+        <input class="btn_submit" type="submit" value="@btnSubmitName" />
+    </form>
+
+</div>
+
+@section Scripts{
+    <script type="text/javascript" src="~/scripts/jquery.validate.js"></script>
+    <script type="text/javascript" src="~/scripts/jquery.validate.unobtrusive.js"></script>
+    <script type="text/javascript" src="~/scripts/productEditing.js" ></script>
+}
+
+
