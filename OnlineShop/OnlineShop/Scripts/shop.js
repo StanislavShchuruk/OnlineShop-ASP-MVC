@@ -23,10 +23,8 @@
                     '<input type="hidden" name="product_id" value="' + item.Id + '" />' +
                     '<img class="product_img" src="/Pictures/' + item.Image + '" />' +
                     '<div class="product_name_div"><a href="#">' + item.Name + '</a></div>' +
-                    //'<div>' +
-                        '<div class="product_price_div">' + item.Price + ' <span>грн.</span></div>' +
-                        '<button id="btn-buy-' + item.Id + '" class="btn_m btn_basket" >Купить</button>' +
-                    //'</div>' +
+                    '<div class="product_price_div">' + item.Price + ' <span>грн.</span></div>' +
+                    '<button id="btn-buy-' + item.Id + '" class="btn_m btn_basket" >Купить</button>' +
                     '<div class="product_quantity_div">В наличии: ' + item.Quantity + '</div>' +
                     '<button id="btn-edit-' + item.Id + '" class="btn_s btn_edit" >Редактировать</button>' +
                     '<button id="btn-delete-' + item.Id + '" class="btn_s btn_del" >Удалить</button>' +
